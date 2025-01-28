@@ -1,9 +1,9 @@
 <template>
   <div class="question-card">
     <p>{{ question.text }}</p>
-    <input type="checkbox" :disabled="!question.doublePoints && doublePointsCount >= 3" v-model="question.doublePoints" @change="updateDoublePointsCount" /> Удвоить
     <button :class="{ answered: question.userAnswered === true }" @click="answer(true)">Да</button>
     <button :class="{ answered: question.userAnswered === false }" @click="answer(false)">Нет</button>
+    <input type="checkbox" :disabled="!question.doublePoints && doublePointsCount >= 3" v-model="question.doublePoints" @change="updateDoublePointsCount" /> Удвоить
   </div>
 </template>
 
@@ -28,7 +28,7 @@ const updateDoublePointsCount = () => {
 
 <style scoped>
 .question-card {
-  border: 1px solid #ccc;
+  border: 1px solid #0e0404;
   padding: 10px;
   margin: 10px;
   border-radius: 5px;

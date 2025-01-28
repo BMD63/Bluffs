@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>Викторина</h1>
+    <h1>БЛЕФЫ</h1>
     <div v-if="!quizComplete">
       <Question
         v-for="(question, index) in currentQuestions"
@@ -33,7 +33,7 @@
 <script setup>
 import { ref, computed } from "vue";
 import { questions } from "./questions";
-import Question from "./Question.vue";
+import Question from "./components/Question.vue";
 
 const currentQuestions = ref([]);
 const userAnswers = ref([]);
@@ -85,6 +85,12 @@ generateOrderedQuestions();
   font-family: Avenir, Helvetica, Arial, sans-serif;
   text-align: center;
   margin-top: 20px;
+  width: 80%;
+  background-color: lightgray;
+  border-color: gray;
+  margin: auto;
+  padding: 10px
+  ;
 }
 button {
   margin: 5px;
