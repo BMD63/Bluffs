@@ -24,7 +24,7 @@ export const questions = [
     { text: "Площадь Австралии больше площади Канады", correctAnswer: false },
     { text: "В Таиланде нельзя писать красным цветом имена живых людей", correctAnswer: true },
     { text: "Бухалово это деревня в Ярославской области", correctAnswer: true },
-    { text: "Алла Агеева - настоящее имя Маши Распутиной", corectAnswer: true },
+    { text: "Алла Агеева - настоящее имя Маши Распутиной", correctAnswer: true },
     { text: "На конец 2024 года в сериале Тайны следствия больше серий чем в сериале Санта Барбара", correctAnswer: false },
     { text: "Манкурты - род степных грызунов семейства беличьих", correctAnswer: false },
     { text: "Хорофобия это страх танцев}", correctAnswer: true },
@@ -39,4 +39,6 @@ export const questions = [
     { text: "Клеопатра жила ближе к временам, когда были живы мамонты, чем к нашим временам", correctAnswer: true },
     { text: "Лед-9 это форма льда, образующего не шестигранные, а девятигранные кристаллы ", correctAnswer: false },
     { text: "Омон Ра это книга про советскую космонавтику", correctAnswer: true },
+    { text: "В Китае запрещено использовать единицу измерения дециметр", correctAnswer: false },
+    { text: "в Европе инструмент болгарку называют russian grinder", correctAnswer: false },
 ]
