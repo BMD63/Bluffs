@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Modal v-if="showRules" :show="showRules" @close="closeRules" />
-    <h1>Викторина</h1>
+    <h1>БЛЕФЫ</h1>
     <div v-if="!quizComplete">
       <Question
         v-for="(question, index) in currentQuestions"
@@ -16,18 +16,23 @@
     </div>
 
     <div v-else>
-      <h2>Результаты</h2>
-      <p>Правильных ответов: {{ correctAnswersCount }} из 7</p>
+      <h2>Результат</h2>
+      <p>Правильных ответов: {{ correctAnswersCount }} из 10</p>
       <div>
         <h3>Правильные ответы:</h3>
         <ul>
           <li v-for="(answer, index) in currentQuestions" :key="index">
-            Вопрос: {{ answer.text }} - {{ answer.correctAnswer ? 'Да' : 'Нет' }}
+            Вопрос: {{ answer.text }} -  Ответ: {{ answer.correctAnswer ? 'Да' : 'Нет' }}
           </li>
         </ul>
+        
       </div>
       <button v-if="!quizFinished" @click="startNewQuiz">Следующая карточка</button>
-      <button v-else @click="restartQuiz">Пройти заново</button>
+      <div v-else>
+      <h2>Поздравляем! Вы ответили на все вопросы!</h2>
+      <p>Общее количество очков: <span>{{ totalScore }}</span></p>
+      <button  @click="restartQuiz">Пройти заново</button>
+    </div>
     </div>
   </div>
 </template>
@@ -37,6 +42,7 @@ import { ref, computed, onMounted } from "vue";
 import { questions } from "./questions";
 import Question from "./components/Question.vue";
 import Modal from "./components/Modal.vue";
+
 const showRules = ref(false);
 const currentQuestions = ref([]);
 const userAnswers = ref([]);
@@ -50,10 +56,6 @@ const quizFinished = ref(false);
 onMounted(() => {
   if (!localStorage.getItem("rulesShown")) {
     showRules.value = true;
-  }
-  const savedScore = localStorage.getItem("totalScore");
-  if (savedScore) {
-    totalScore.value = parseInt(savedScore, 10);
   }
   generateOrderedQuestions();
 });
@@ -80,13 +82,17 @@ const handleAnswer = ({ index, userAnswer }) => {
 };
 
 const submitAnswers = () => {
+  correctAnswersCount.value = userAnswers.value.filter((answer, index) => 
+    answer === currentQuestions.value[index].correctAnswer
+  ).length;
+
   const roundScore = userAnswers.value.reduce((total, answer, index) => {
     const isCorrect = answer === currentQuestions.value[index].correctAnswer;
     const points = isCorrect ? (currentQuestions.value[index].doublePoints ? 2 : 1) : 0;
     return total + points;
   }, 0);
+
   totalScore.value += roundScore;
-  localStorage.setItem("totalScore", totalScore.value);
 
   if (currentIndex.value + 7 >= questions.length) {
     quizFinished.value = true;
@@ -138,6 +144,13 @@ button:hover {
 }
 .next {
   margin-bottom: 10px;
+}
+li {
+  text-align: left;
+  margin-top: 5px;
+}
+p span {
+  font-weight: bold;
 }
 </style>
 
